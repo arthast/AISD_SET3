@@ -18,12 +18,12 @@ public:
     SortTester(int runs = 5) : numRuns(runs) {
     }
 
-    long long measureMergeSort(vector<int> arr) {
+    long long measureQuickSort(vector<int> arr) {
         vector<long long> times;
         for (int run = 0; run < numRuns; run++) {
             vector<int> temp = arr;
             auto start = chrono::high_resolution_clock::now();
-            SortAlgorithms::mergeSort(temp, 0, temp.size());
+            SortAlgorithms::basicQuick(temp, 0, temp.size());
             auto elapsed = chrono::high_resolution_clock::now() - start;
             long long microsec = chrono::duration_cast<chrono::microseconds>(elapsed).count();
             times.push_back(microsec);
@@ -31,12 +31,12 @@ public:
         return getMedian(times);
     }
 
-    long long measureHybridSort(vector<int> arr, int threshold) {
+    long long measureIntroSort(vector<int> arr) {
         vector<long long> times;
         for (int run = 0; run < numRuns; run++) {
             vector<int> temp = arr;
             auto start = chrono::high_resolution_clock::now();
-            SortAlgorithms::hybridMergeSort(temp, 0, temp.size(), threshold);
+            SortAlgorithms::introSort(temp, 0, temp.size());
             auto elapsed = chrono::high_resolution_clock::now() - start;
             long long microsec = chrono::duration_cast<chrono::microseconds>(elapsed).count();
             times.push_back(microsec);
